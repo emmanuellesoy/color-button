@@ -3,24 +3,47 @@ import "./App.css";
 
 function App() {
   const [buttonColor, setButtonColor] = useState("red");
-  const newButtonColor = buttonColor === "red" ? "blue" : "red";
   const [buttonState, setButtonState] = useState(false);
+  const [buttonText, setButtonText] = useState("blue");
+
+  const onHandleClickCheckbox = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setButtonState(true);
+      setButtonColor("gray");
+      setButtonText("blue");
+    } else {
+      setButtonState(false);
+      setButtonColor("red");
+      setButtonText("blue");
+    }
+  };
+
+  const onHandleClickButton = () => {
+    if (buttonText === "blue") {
+      setButtonColor("blue");
+      setButtonText("red");
+    } else {
+      setButtonColor("red");
+      setButtonText("blue");
+    }
+  };
 
   return (
     <div>
       <button
         style={{ backgroundColor: buttonColor }}
-        onClick={() => setButtonColor(newButtonColor)}
+        onClick={onHandleClickButton}
         disabled={buttonState}
       >
-        Change to {newButtonColor}
+        Change to {buttonText}
       </button>
       <input
         type="checkbox"
-        onClick={() => setButtonState(!buttonState)}
+        onClick={onHandleClickCheckbox}
         id="disabled-button-checkbox"
       />
-      <label for="disabled-button-checkbox">Disable button</label>
+      <label htmlFor="disabled-button-checkbox">Disable button</label>
     </div>
   );
 }
