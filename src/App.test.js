@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 
+import { replaceCamelCaseWithSpaces } from "./App";
+
 test("button has correct initial color", () => {
   render(<App />);
 
@@ -67,4 +69,18 @@ test("complete gray -> blue -> red button flow", () => {
   fireEvent.click(button);
   expect(checkbox).not.toBeChecked();
   expect(button).toHaveStyle({ backgroundColor: "blue" });
+});
+
+describe("color names", () => {
+  test("no capital letters", () => {
+    expect(replaceCamelCaseWithSpaces("Red")).toBe("Red");
+  });
+  test("one capital letter", () => {
+    expect(replaceCamelCaseWithSpaces("MidnightBlue")).toBe("Midnight Blue");
+  });
+  test("multiple capital letters", () => {
+    expect(replaceCamelCaseWithSpaces("MediumVioletRed")).toBe(
+      "Medium Violet Red"
+    );
+  });
 });
