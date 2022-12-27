@@ -42,7 +42,7 @@ test("disabled button when checkbox is cheked", () => {
   // check that the button is disabled and checkbox is checked
   fireEvent.click(checkbox);
   expect(checkbox).toBeChecked();
-  expect(colorButton).not.toBeEnabled();
+  expect(colorButton).toBeDisabled();
 
   // check that button is enabled and checkbox unchecked
   fireEvent.click(checkbox);
